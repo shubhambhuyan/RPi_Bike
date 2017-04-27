@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+  <title>Joystick</title>
+  
+  <script type="text/javascript" src="/jquery.js"></script>
+  <script type="text/javascript" src="/webiopi.js"></script>
+  
+   <script type="text/javascript">
+        webiopi().ready(function() {
+                var led,button;
+
+                webiopi().setFunction(15,"out")
+                        led = webiopi().createGPIOButton(15,"\u2600");
+                        $("#led").append(led);
+
+
+                button = webiopi().createButton("bt_up", "\u25B2", forward, stop);
+                $("#buttonR1").append(button);
+				
+				 button = webiopi().createButton("bt_left", "\u25C4", left, stop);
+                $("#buttonR3").append(button);
+
+                //button = webiopi().createButton("bt_stop", "\u25A0", stop);
+                //$("#middle").append(button);
+
+                button = webiopi().createButton("bt_right", "\u25BA", right, stop);
+                $("#buttonR2").append(button);
+
+                button = webiopi().createButton("bt_down", "\u25BC", back, stop);
+                $("#buttonR4").append(button);
+				
+				webiopi().refreshGPIO(true);
+        });
+
+        function right() {
+                webiopi().pulseAngle(18, 45);
+				webiopi().digitalWrite(17, 0);
+                webiopi().digitalWrite(4, 1);
+				
+        }
+
+        function left() {
+                webiopi().pulseAngle(18, -45);
+				webiopi().digitalWrite(17, 0);
+                webiopi().digitalWrite(4, 1);
+        }
+
+        function forward(){
+				webiopi().pulseAngle(18, 0);
+                webiopi().digitalWrite(17, 0);
+                webiopi().digitalWrite(4, 1);
+
+        }
+
+        function back(){
+				webiopi().pulseAngle(18, 0);
+                webiopi().digitalWrite(17, 1);
+                webiopi().digitalWrite(4, 0);
+        }
+		
+		function stop() {
+				webiopi().pulseAngle(18, 0);
+                webiopi().digitalWrite(17, 0);
+                webiopi().digitalWrite(4, 0);
+        }
+  </script>
+  
+  
+  <style>
+	button{
+	  width:30px;
+	  height:30px;
+	  border-top:5px solid #444;
+	  border-right:5px solid #222;
+	  background:#555;
+	}
+	
+	button:active{
+	  border-top:3px solid #444;
+	  border-right:3px solid #222;
+	  transform: translateY(4px);
+	}
+	
+	  body{
+	  background:#fff;
+	  margin:100px 246px;
+	}
+	
+	lefttop{
+		  
+	}
+
+	.right_top{
+	  width:100px;
+	  height:50px;
+	  background:#555;
+	  border-radius:20px;
+	  border-top:5px solid #BBB;
+	  position:absolute;
+	  top:60px;
+	  left:250px
+	}
+
+	.right_top:active {
+	  border-top:3px solid #BBB;
+	  transform: translateY(7px);
+	}
+	
+	.led{
+	   position:absolute;
+	   top:60px;
+	   left:450px
+	}
+	
+	left_top:active {
+	  border-top:3px solid #BBB;
+	  transform: translateY(7px);
+	}
+	
+	.left_top{
+	 width:100px;
+	 height:50px;
+	 background:#555;
+	 border-radius:20px;
+	  border-top:5px solid #BBB;
+	  position:absolute;
+	  top:60px;
+	  left:570px
+	}
+
+	.body{
+	  width:350px;
+	  height:150px;
+	  margin:100px 63px;
+	  background:#333;
+	  border-top:5px solid #BBB;
+	  border-bottom:5px solid #666;
+	}
+
+	.body .start{
+	  width: 0; 
+	  height: 0; 
+	  border-top: 10px solid transparent;
+	  border-bottom: 10px solid transparent;
+	  border-left: 30px solid #555;
+	  position:absolute;
+	  top:180px;
+	  left:480px;
+	}
+
+	.body .select{
+	  width:30px; 
+	  height:20px; 
+	  background:#555;
+	  position:absolute;
+	  top:180px;
+	  left:420px;
+	}
+
+	.right_side{
+	  width:200px;
+	  height:200px;
+	  background:#333;
+	  border-top:5px solid #BBB;
+	  border-bottom:5px solid #666;
+	  border-radius:100%;
+	  position:absolute;
+	  top:80px;
+	  left:200px;
+	}
+
+	.left_side{
+	  width:200px;
+	  height:200px;
+	  background:#333;
+	  border-top:5px solid #BBB;
+	  border-bottom:5px solid #666;
+	  border-radius:100%;
+	  position:absolute;
+	  top:80px;
+	  left:520px
+	}
+
+	.right_side .button1{
+	  position:absolute;
+	  top:50px;
+	  left:85px
+	}
+
+	.right_side .button2{
+	  position:absolute;
+	  top:84px;
+	  left:119px
+	}
+	
+	.right_side .button3{
+	  position:absolute;
+	  top:84px;
+	  left:50px
+	}
+
+	.right_side .button4{
+	  position:absolute;
+	  top:118px;
+	  left:85px
+	}
+
+	.left_side .button1{
+	  width:30px;
+	  height:30px;
+	  border-top:5px solid #444;
+	  border-right:5px solid #222;
+	  border-radius:100%;
+	  background:#085;
+	  position:absolute;
+	  top:50px;
+	  left:85px
+	}
+
+	.left_side .button1:active {
+	  border-top:3px solid #444;
+	  border-right:3px solid #222;
+	  transform: translateY(4px);
+	}
+
+	.left_side .button2{
+	  width:30px;
+	  height:30px;
+	  border-top:5px solid #444;
+	  border-right:5px solid #222;
+	  border-radius:100%;
+	  background:#F33;
+	  position:absolute;
+	  top:84px;
+	  left:120px
+	}
+
+	.left_side .button2:active {
+	  border-top:3px solid #444;
+	  border-right:3px solid #222;
+	  transform: translateY(4px);
+	}
+
+	.left_side .button3{
+	  width:30px;
+	  height:30px;
+	  color:#338;
+	  border-top:5px solid #444;
+	  border-right:5px solid #222;
+	  border-radius:100%;
+	  background:#F77;
+	  position:absolute;
+	  top:84px;
+	  left:50px
+	}
+
+	.left_side .button3:active {
+	  border-top:3px solid #444;
+	  border-right:3px solid #222;
+	  transform: translateY(4px);
+	}
+
+	.left_side .button4{
+	  width:30px;
+	  height:30px;
+	  color:#338;
+	  border-top:5px solid #444;
+	  border-right:5px solid #222;
+	  border-radius:100%;
+	  background:#44F;
+	  position:absolute;
+	  top:118px;
+	  left:85px
+	}
+
+	.left_side .button4:active {
+	  border-top:3px solid #444;
+	  border-right:3px solid #222;
+	  transform: translateY(4px);
+	}
+
+	.right_bottom{
+	  width:200px;
+	  height:170px;
+	  background:#333;
+	  border-top:5px solid #BBB;
+	  border-bottom:5px solid #666;
+	  border-radius:100% 0 10px 100%;
+	  position:absolute;
+	  -webkit-transform: rotate(-80deg);
+	  -moz-transform: rotate(-80deg);
+	  -o-transform: rotate(-80deg);
+	  -ms-transform: rotate(-80deg);
+	  transform: rotate(-80deg);
+	  z-index:-1;
+	  top:215px;
+	  left:170px
+	}
+
+	.left_bottom{
+	  width:200px;
+	  height:170px;
+	  background:#333;
+	  border-top:5px solid #BBB;
+	  border-bottom:5px solid #666;
+	  border-radius:100% 0 10px 100%;
+	  position:absolute;
+	  -webkit-transform: rotate(260deg);
+	  -moz-transform: rotate(260deg);
+	  -o-transform: rotate(260deg);
+	  -ms-transform: rotate(260deg);
+	  transform: rotate(260deg);
+	  z-index:-1;
+	  top:215px;
+	  left:545px
+	}
+  </style>
+  
+</head>
+
+
+
+
+
+
+<body>
+    <div class="right_top" id="right_top"></div>
+	<div class="led" id="led"></div>
+	<div class="left_top" id="left_top"></div>
+	<div class="body">
+	  <div class="start" id="start"></div>
+	  <div class="select" id="select"></div>
+	</div>
+	
+	
+	<div class="right_side">
+	  <div class="button1" id="buttonR1"></div>
+	  <div class="button2" id="buttonR2"></div>
+	  <div class="button3" id="buttonR3"></div>
+	  <div class="button4" id="buttonR4"></div>
+	</div>
+	
+	
+	<div class="left_side">
+	  <div class="button1" id="buttonL1"></div>
+	  <div class="button2" id="buttonL2"></div>
+	  <div class="button3" id="buttonL3"></div>
+	  <div class="button4" id="buttonL4"></div>
+	</div>
+	
+	
+	<div class="right_bottom"></div>
+	<div class="left_bottom"></div>
+  
+  
+</body>
+</html>
